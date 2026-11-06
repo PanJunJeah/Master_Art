@@ -1,0 +1,130 @@
+-- 艺术家表
+CREATE TABLE artists (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    nationality VARCHAR(50) NOT NULL,
+    birth_year INT,
+    death_year INT,
+    biography TEXT,
+    portrait_url VARCHAR(255),
+    art_style VARCHAR(100),
+    era VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 艺术流派表
+CREATE TABLE art_styles (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    era VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 艺术作品表
+CREATE TABLE artworks (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    artist_id INT NOT NULL,
+    style_id INT,
+    creation_year INT,
+    medium VARCHAR(100),
+    dimensions VARCHAR(100),
+    location VARCHAR(255),
+    description TEXT,
+    image_url VARCHAR(255),
+    is_3d_model BOOLEAN DEFAULT FALSE,
+    model_url VARCHAR(255),
+    view_count INT DEFAULT 0,
+    favorite_count INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (artist_id) REFERENCES artists(id),
+    FOREIGN KEY (style_id) REFERENCES art_styles(id)
+);
+
+-- 用户表
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    avatar_url VARCHAR(255),
+    role ENUM('USER', 'ADMIN') DEFAULT 'USER',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 用户收藏表
+CREATE TABLE user_favorites (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    artwork_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (artwork_id) REFERENCES artworks(id),
+    UNIQUE KEY (user_id, artwork_id)
+);
+
+-- 评论表
+CREATE TABLE comments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    artwork_id INT NOT NULL,
+    content TEXT NOT NULL,
+    status ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'PENDING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (artwork_id) REFERENCES artworks(id)
+);
+
+-- 用户上传作品表
+CREATE TABLE user_uploads (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    image_url VARCHAR(255) NOT NULL,
+    status ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'PENDING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- 操作日志表
+CREATE TABLE operation_logs (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    operation_type VARCHAR(50) NOT NULL,
+    operation_detail TEXT,
+    ip_address VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- 展览活动表
+CREATE TABLE exhibitions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    cover_image_url VARCHAR(255),
+    status ENUM('UPCOMING', 'ONGOING', 'ENDED') DEFAULT 'UPCOMING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 展览作品关联表
+CREATE TABLE exhibition_artworks (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    exhibition_id INT NOT NULL,
+    artwork_id INT NOT NULL,
+    display_order INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (exhibition_id) REFERENCES exhibitions(id),
+    FOREIGN KEY (artwork_id) REFERENCES artworks(id)
+);

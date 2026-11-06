@@ -1,0 +1,147 @@
+/* ============================================================
+   MasterArt 全局主题基座 —— 美术馆暖色调
+   奶油底 #f6f3ee / 墨绿炭黑 #1f2a24 / 金色 #8a6a33、#b08d57
+   ============================================================ */
+
+:root {
+  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #33302a;
+  background-color: #f6f3ee;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* ---- Element Plus 主色覆盖：金色 ---- */
+  --el-color-primary: #8a6a33;
+  --el-color-primary-light-3: #b08d57;
+  --el-color-primary-light-5: #c9b48a;
+  --el-color-primary-light-7: #e0d3b8;
+  --el-color-primary-light-8: #eae0cd;
+  --el-color-primary-light-9: #f4eee1;
+  --el-color-primary-dark-2: #6f5529;
+  --el-color-success: #4c8c63;
+  --el-color-warning: #b08d57;
+  --el-bg-color-page: #f6f3ee;
+  --el-bg-color: #fffdf9;
+  --el-border-radius-base: 8px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #f6f3ee;
+  color: #33302a;
+}
+
+/* 全局弹性布局修复（移除 Vite 模板的居中/深色残留） */
+#app {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  min-height: 100vh;
+  display: block;
+}
+
+a {
+  color: #8a6a33;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+a:hover {
+  color: #6f5529;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #23201c;
+}
+
+::selection {
+  background: rgba(176, 141, 87, 0.28);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #efe9db;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cfc4ad;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b08d57;
+}
+
+/* ---- 通用按钮（覆盖全局 .btn 系列） ---- */
+.btn {
+  display: inline-block;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: #1f2a24;
+  color: #f5efe4;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #8a6a33;
+  color: #fff;
+}
+
+/* ---- 通用区块标题 ---- */
+.section-title {
+  font-size: 26px;
+  color: #23201c;
+  margin-bottom: 26px;
+  text-align: center;
+  position: relative;
+  font-family: Georgia, 'Noto Serif SC', 'Songti SC', serif;
+  letter-spacing: 1px;
+}
+
+/* ---- 通用卡片 ---- */
+.el-card {
+  border-radius: 12px;
+  border: 1px solid #e9e2d4;
+  background: #fffdf9;
+}
+
+/* ---- 通用页面大标题区（供未定制页面兜底） ---- */
+.page-banner {
+  background: linear-gradient(135deg, #1f2a24 0%, #2c3a32 55%, #3a4638 100%);
+  color: #f5efe4;
+}
+
+/* ---- 详情页「问 AI」按钮 ---- */
+.ask-ai-btn {
+  margin-top: 14px;
+  background: rgba(217, 195, 145, 0.15) !important;
+  border: 1px solid #d9c391 !important;
+  color: #e8ddc4 !important;
+}
+
+.ask-ai-btn:hover {
+  background: #d9c391 !important;
+  color: #1f2a24 !important;
+  border-color: #d9c391 !important;
+}

@@ -243,12 +243,6 @@ AI_API_KEY=sk-xxxx mvn spring-boot:run
 
 未配置 `AI_API_KEY` 时应用仍可正常启动（浏览/管理功能可用），AI 接口会返回友好降级提示。
 
-> ⚠️ 如果您曾在旧提交中提交过真实 Key，请立即到 DeepSeek 控制台**吊销并重新生成** Key。
-> 上传 GitHub 前可执行以下自检：
-> ```bash
-> git grep -n "sk-" -- . ':!*.md'        # 工作区检查
-> git log --all -S "sk-" --oneline       # 历史检查
-> ```
 
 ---
 

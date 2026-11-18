@@ -224,7 +224,7 @@ npm run dev
 | `agent.rag.top-k` | `5` | RAG 返回条数 |
 | `agent.chat-memory.max-messages` | `20` | 对话记忆窗口 |
 
-### 🔑 API Key 安全（不要提交到仓库）
+### 🔑 API Key 安全
 
 仓库中**不含任何真实 Key**。请通过环境变量注入（任选其一）：
 
@@ -364,8 +364,7 @@ A：设置环境变量 `AI_MODEL=deepseek-reasoner`，或修改 `spring.ai.opena
 
 - [AGENT_MODULE.md](AGENT_MODULE.md) —— AI 策展 Agent 架构、安全设计、接口与测试详解
 - [trial-data.sql](trial-data.sql) —— 试运行种子数据
-- `面试准备/` —— 项目面试讲解手册与速答卡
+
 
 ---
 
-> 本项目用于学习与毕业设计/面试展示。API Key 请勿提交到公开仓库，建议使用环境变量注入。
